@@ -35,7 +35,10 @@ function crea_presentacio() {
     // Fer les substitucions
     
     requests = [];    
-    for (var j=1;j<values[0].length;j++) {      
+    for (var j=1;j<values[0].length;j++) {
+      if(Date.parse(values[i][j]).toString() != "NaN"){
+        values[i][j]=values[i][j].toLocaleDateString("ca-ES").replace(/\/ /g, "");
+      }      
       requests.push({
         replaceAllText: {
           containsText: {
@@ -44,35 +47,9 @@ function crea_presentacio() {
           },
           replaceText: values[i][j],
           pageObjectIds: diapo
-      }});
-    }    
-    
-    // Afegir imatge
-    
-    var imageUrl = 'https://www.google.com/images/branding/googlelogo/2x/' +
-        'googlelogo_color_272x92dp.png';
-    var cm1 = 360000 // 1 cm EMU
-    requests.push({
-      createImage: {
-        url: imageUrl,
-        elementProperties: {
-          pageObjectId: diapo,
-          size: {
-            height: {magnitude: 2 * cm1,
-                    unit: 'EMU'},
-            width: {magnitude: 3 * cm1,
-                    unit: 'EMU'}
-          },
-          transform: {
-            scaleX: 1,
-            scaleY: 1,
-            translateX: 20 * cm1,
-            translateY: 5 * cm1,
-            unit: 'EMU'
-          }
         }
-      }
-    });    
+      });      
+    }         
     result = Slides.Presentations.batchUpdate({
         requests: requests
     }, presentationCopyId);    
