@@ -1,3 +1,5 @@
+// Cal habilitar a Recursos-Serveis avançats de Google: Drive API i Google Slides API
+
 function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu('Presentació')
@@ -6,7 +8,7 @@ function onOpen() {
 }
 
 function crea_presentacio() {
-  var templatePresentationId = "168PtJxeYYJTpNZsRvHvxOvKtPRSEfuFOIwCLM69s5hI";
+  var templatePresentationId = "1d6DXRKDIEiZlmkDG_6X5p8-MFGeUlhWMaU7jMw5L7co";
   var values = SpreadsheetApp.getActive().getSheets()[0].getDataRange().getValues();
   var copyFile = {
     title: 'prova Presentació',
@@ -18,7 +20,7 @@ function crea_presentacio() {
   copyFile = Drive.Files.copy(copyFile, templatePresentationId);
   var presentationCopyId = copyFile.id;
   var diapositiva = Slides.Presentations.get(presentationCopyId).slides[0].objectId;
-  
+
   for (var i=1;i<values.length;i++) {   
     // Copiar la primera diapositiva
     
@@ -36,20 +38,36 @@ function crea_presentacio() {
     
     requests = [];    
     for (var j=1;j<values[0].length;j++) {
-      if(Date.parse(values[i][j]).toString() != "NaN"){
-        values[i][j]=values[i][j].toLocaleDateString("ca-ES").replace(/\/ /g, "");
-      }      
-      requests.push({
-        replaceAllText: {
-          containsText: {
-            text: '{{'+values[0][j]+'}}',
-            matchCase: true
-          },
-          replaceText: values[i][j],
-          pageObjectIds: diapo
+      if(values[0][j] == "Material" || values[0][j] == "Enllaços" ) { // Columnes amb valors separats per comes
+        var valor = values[i][j].toString().split(",");
+        for(var k=0;k<5;k++){
+          requests.push({
+            replaceAllText: {
+              containsText: {
+                text: '{{' + values[0][j] + k + '}}',
+                matchCase: true
+              },
+              replaceText: valor[k],
+              pageObjectIds: diapo
+            }
+          });
         }
-      });      
-    }         
+      } else {            
+        if(Object.prototype.toString.call(values[i][j]) === "[object Date]"){ // Columnes amb dates
+          values[i][j]=values[i][j].toLocaleDateString("ca-ES").replace(/\/ /g, "");
+        }      
+        requests.push({
+          replaceAllText: {
+            containsText: {
+              text: '{{'+values[0][j]+'}}',
+              matchCase: true
+            },
+            replaceText: values[i][j].toString(),
+            pageObjectIds: diapo
+          }
+        });      
+      }    
+    }
     result = Slides.Presentations.batchUpdate({
         requests: requests
     }, presentationCopyId);    
