@@ -22,7 +22,7 @@ function crea_presentacio() {
   var presentationCopyId = copyFile.id;
   var diapositiva = Slides.Presentations.get(presentationCopyId).slides[0].objectId;
 
-  for (var i=1;i<values.length;i++) {   
+  for (var i=values.length-1;i>0;i--) {   
     // Copiar la primera diapositiva
     
     requests = [{
@@ -48,50 +48,58 @@ function crea_presentacio() {
         }
         var valor = values[i][j].toString().split(",");
         for(var k=0;k<valor.length;k++){
-          requests.push({
-            createShape: {
-              objectId: values[0][j].slice(0,3) + i.toString() + k.toString(),
-              shapeType:'TEXT_BOX',
-              elementProperties:{
-                pageObjectId: diapo,
-                size: {
-                  width: {magnitude: 3.20 * cm1,
-                          unit: 'EMU'},
-                  height: {magnitude: 0.37 * cm1,
-                          unit: 'EMU'}
-                },
-                transform: {
-                  scaleX: 1,
-                  scaleY: 1,
-                  translateX: 21.07 * cm1,
-                  translateY: (offset + 0.37 * k) * cm1,
-                  unit: 'EMU'
+              requests.push({ // Crear les shapes que contindran textos
+                createShape: {
+                  objectId: values[0][j].slice(0,3) + i.toString() + k.toString(),
+                  shapeType:'TEXT_BOX',
+                  elementProperties:{
+                    pageObjectId: diapo,
+                    size: {
+                      width: {magnitude: 5.76 * cm1,
+                              unit: 'EMU'},
+                      height: {magnitude: 0.37 * cm1,
+                              unit: 'EMU'}
+                    },
+                    transform: {
+                      scaleX: 1,
+                      scaleY: 1,
+                      translateX: 19.24 * cm1,
+                      translateY: (offset + 0.37 * k) * cm1,
+                      unit: 'EMU'
+                    }
+                  }       
                 }
-              }       
+             });
+            if(values[0][j] == "Material") {
+              var ID = valor[k].split("=")[1];
+              Logger.log(ID);
+              var file = Drive.Files.get(ID);
+              var textURL = file.title.split(" - ")[0].slice(0,15) + "(" + file.getMimeType().slice(0,11) + ")";
+            } else {
+              var textURL = "Enllaç " + (k + 1).toString();
             }
-          });
-          requests.push({
-            insertText: {
-              objectId: values[0][j].slice(0,3) + i.toString() + k.toString(),
-              text:'Enllaç ' + (k + 1).toString(),         
-            }
-          });
-          requests.push({
-            updateTextStyle: {
-              objectId: values[0][j].slice(0,3) + i.toString() + k.toString(),
-              fields:'*',
-              style:{
-                fontSize:{
-                  magnitude: 10,
-                  unit: 'PT'
-                },
-                underline: true,
-                link:{
-                  url:valor[k].toString()
-                }
-              }
-            }
-          });
+             requests.push({ // Posar el text en les shapes
+               insertText: {
+                 objectId: values[0][j].slice(0,3) + i.toString() + k.toString(),
+                 text: textURL
+               }
+             });
+             requests.push({ // Assignar els links als textos
+               updateTextStyle: {
+                 objectId: values[0][j].slice(0,3) + i.toString() + k.toString(),
+                 fields:'*',
+                 style:{
+                   fontSize:{
+                     magnitude: 8,
+                     unit: 'PT'
+                   },
+                   underline: true,
+                   link:{
+                     url:valor[k].toString()
+                   }
+                 }
+               }
+             });
         }
       } else {            
         if(Object.prototype.toString.call(values[i][j]) === "[object Date]"){ // Columnes amb dates
@@ -109,7 +117,7 @@ function crea_presentacio() {
         });      
       }      
     }     
-    result = Slides.Presentations.batchUpdate({
+    Slides.Presentations.batchUpdate({
         requests: requests
     }, presentationCopyId);    
   }
@@ -121,7 +129,7 @@ function crea_presentacio() {
       "objectId": diapositiva
     }
   }];    
-  result = Slides.Presentations.batchUpdate({
+  Slides.Presentations.batchUpdate({
     requests: requests
   }, presentationCopyId); 
 }
