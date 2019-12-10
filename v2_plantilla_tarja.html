@@ -1,12 +1,13 @@
 <div id='targeta' class='m-2 zindex-dropdown'>
-    <a onclick="obreDescripcio({{id}})" >
+    <div style='text-align:center' onclick="obreDescripcio({{id}})" >
         <img id='destacada' class='imatge' src='{{Imatge}}'>
-    </a>
+    </div>
     <div style='display:flex;justify-content:flex-end;padding-right:5%'>
-        <!--<a onclick="obreConsells()">
+        <!--<a href="http://atenciociutadana.gencat.cat/web/.content/manuals/xarxes/20170504-Manual-dels-governs-a-Twitter.pdf" target="_blank">-->
+        <a onclick="obreConsells()">
             <img src='https://edumet.cat/areatac/p2/imatges/baseline_info_twitter_48dp.png' style='height:27px' />
-        </a>-->
-        <a href='https://twitter.com/intent/tweet?size=large&button_hashtag={{Hashtag}}&text={{Missatge}}&via={{Via}}&hashtags=DGIRCD' class="twitter-hashtag-button" data-show-count="false">Twitter</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>         
+        </a>
+        <a href='https://twitter.com/intent/tweet?size=large&button_hashtag={{#}}&text={{Text}}&via={{Via}}&hashtags=DGIRCD' class="twitter-hashtag-button" data-show-count="false">Twitter</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>         
     </div>
     <div onclick="obreDescripcio({{id}})">
         <div class='titol'>{{Nom de la formació}}</div>

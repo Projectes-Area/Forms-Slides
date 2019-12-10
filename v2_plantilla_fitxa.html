@@ -1,101 +1,114 @@
 <script>
-function obreConsells() {
-    var msgTitol = 'Tweets : Tinguem en compte ...';
-    var divMsg='<div style="display:flex;width:100%;height:70vh;font-size:1.7vmin">';
-    divMsg+='<ul>';
-    divMsg+='<li>Consell 1</li>';
-    divMsg+='<li>Consell 2</li>';
-    divMsg+='<li>Consell 3</li>';
-    divMsg+='</ul></div>';
-
-    $('#modalHeaderTarja').html(msgTitol);
-    $('#missatgeTarja').html(divMsg);
-    $('#finestraTarja').modal('show');
-}
-
-function obreDescripcio(id) {
-    var msgTitol = '{{Nom de la formació}}';
-    var divMsg='<div style="display:flex;width:100%;height:70vh;font-size:1.7vmin">';
-    divMsg+='<div id="esquerra" class="div-comu div-caixa" style="width:50%;height:70vh">';
-    divMsg+='<div id="idees" class="div-comu div-caixa" style="width:100%;height:45vh;border-right-style:none;border-left-style: none;;border-top-style:none">';
-    divMsg+='<div class="subIcons"><img class="icona_blava" src="https://edumet.cat/areatac/p2/imatges/baseline_wb_incandescent_black_48dp.png" />';
-    divMsg+='<label class="titolBlau">IDEES CLAU</label></div>';
-    divMsg+='<ul style="padding-inline-start: 20px"><li>{{Idees clau. Idea 1}}</li><li>{{Idees clau. Idea 2}}</li><li>{{Idees clau. Idea 3}}</li><li>{{Idees clau. Idea 4}}</li><li>{{Idees clau. Idea 5}}</li></ul></div>';
-    divMsg+=' <div id="tweet" class="div-comu div-caixa" style="width:100%;height:39vmin;border-style:none">';
-    divMsg+='<div class="subIcons"><img class="icona_blava" src="https://edumet.cat/areatac/p2/imatges/baseline_share_black_48dp.png" />';
-    divMsg+='  <div><label class="titolBlau">DIFUSIÓ</label></div></div><div style="padding:5px">';
-    divMsg+='{{Missatge}}<br><br><em style="color:firebrick">{{Hashtag}} {{Font}}</em></div></div>';
-    divMsg+='<div id="bottom-left" class="div-caixa" style="display:flex;width:100%;height:6vmin;border-style:none">';
-    divMsg+='<div id="logo" class="div-comu div-caixa" style="width:30%;height:6vmin;position:relative;border-style: none">';
-    divMsg+=' <img src="https://edumet.cat/areatac/p2/imatges/DGIRCD_2l_vermell.jpg" style="width:100%;position:absolute;left:5px;bottom:0"></div></div></div>';
-    divMsg+='<div id="centre" class="div-comu div-caixa" style="width:25%;height:70vh">';
-    divMsg+='<div id="assistent" class="div-comu div-caixa" style="width:100%;height:20vh;border-left-style:none;border-right-style:none;border-top-style:none">';
-    divMsg+='<div class="subIcons"><img class="icona_blava" src="https://edumet.cat/areatac/p2/imatges/baseline_person_black_48dp.png" />';
-    divMsg+='<label class="titolBlau">ASSISTENT</label></div>';
-    divMsg+='<div style="padding:5px"><div>{{Nom i cognoms}}</div><div>{{Servei al que pertanys}}</div>';
-    divMsg+='<div style="display:flex;align-items:center"><img src="https://edumet.cat/areatac/p2/imatges/baseline_mail_outline_black_48dp.png" style="height:3vmin;padding-right:5px" />{{Adreça electrònica}}</div>';
-    divMsg+='<div style="display:flex;align-items:center"><img src="https://edumet.cat/areatac/p2/imatges/baseline_call_black_48dp.png" style="height:3vmin;padding-right:5px" />934006900 - {{Extensió telefònica}}</div>';
-    divMsg+='</div></div>';
-    divMsg+='<div id="networking" class="div-comu div-caixa" style="width:100%;height:50vh;border-style:none">';
-    divMsg+='<div class="subIcons"><img class="icona_blava" src="https://edumet.cat/areatac/p2/imatges/baseline_group_add_black_48dp.png" />';
-    divMsg+='<label class="titolBlau">NETWORKING</label></div><ul style="padding-inline-start: 20px">';
-    divMsg+='<li>{{Contacte 1}}</li>';
-    divMsg+='<li>{{Contacte 2}}</li>';
-    divMsg+='<li>{{Contacte 3}}</li></ul></div></div>';
-    divMsg+='<div id="dreta" class="div-comu div-caixa" style="width:25%;height:70vh">';
-    divMsg+='<div id="data" class="div-comu div-caixa" style="width:100%;height:10vh;border-right-style:none;border-left-style:none;border-top-style:none">';
-    divMsg+='<div class="subIcons"><img class="icona_blava" src="https://edumet.cat/areatac/p2/imatges/baseline_event_black_48dp.png" />';
-    divMsg+='<label class="titolBlau">DATA</label></div>';
-    divMsg+='<div style="text-align: center">{{Data de la formació}}</div></div>';   
-    divMsg+='<div id="entitat" class="div-comu div-caixa" style="width:100%;height:10vh;border-right-style:none;border-left-style:none;border-top-style:none">';
-    divMsg+='<div class="subIcons"><img class="icona_blava" src="https://edumet.cat/areatac/p2/imatges/baseline_home_work_black_48dp.png" />';
-    divMsg+='<label class="titolBlau">ENTITAT</label></div>';
-    divMsg+='<div style="text-align: center">{{Entitat que organitza}}</div></div>';
-    divMsg+='<div id="paraules" class="div-comu div-caixa" style="width:100%;height:18vmin;border-right-style:none;border-left-style:none;border-top-style:none"><div class="subIcons">';
-    divMsg+='<img class="icona_blava" src="https://edumet.cat/areatac/p2/imatges/baseline_vpn_key_black_48dp.png" />';
-    divMsg+='<label class="titolBlau">PARAULES CLAU</label></div>';
-    divMsg+='<div style="padding:5px">{{Paraules clau}}</div></div>';
-    divMsg+='<div id="enllacos" class="div-comu div-caixa" style="width:100%;height:16vh;border-right-style:none;border-left-style:none;border-top-style:none">';
-    divMsg+='<div class="subIcons"><img class="icona_blava" src="https://edumet.cat/areatac/p2/imatges/baseline_link_black_48dp.png" />';
-    divMsg+='<label class="titolBlau">ENLLAÇOS</label></div>';
-    divMsg+='<div style="text-align:center"><a id="enl1" href="{{Enllaç 1}}" target="blank">Enllaç 1</a></div>';
-    divMsg+='<div style="text-align:center"><a id="enl2" href="{{Enllaç 2}}" target="blank">Enllaç 2</a></div>';
-    divMsg+='<div style="text-align:center"><a id="enl3" href="{{Enllaç 3}}" target="blank">Enllaç 3</a></div></div>';
-    divMsg+='<div id="material" class="div-comu div-caixa" style="width:100%;height:16vh;border-style:none">';
-    divMsg+='<div class="subIcons"><img class="icona_blava" src="https://edumet.cat/areatac/p2/imatges/baseline_attach_file_black_48dp.png" />';
-    divMsg+='<label class="titolBlau">MATERIALS</label></div>';
-    divMsg+='<div style="text-align:center"><a id="mat1" href="{{Material 1}}" target="blank">Material 1</a></div>';
-    divMsg+='<div style="text-align:center"><a id="mat2" href="{{Material 2}}" target="blank">Material 2</a></div>';
-    divMsg+='<div style="text-align:center"><a id="mat3" href="{{Material 3}}" target="blank">Material 3</a></div></div></div></div>';
-  
-    for (r = 0; row_org.length; r++) {
-        if (id == row_org[r]['id']) {
+    function obreConsells() {
+        var msgTitol = '';
+        var divMsg='<img src="https://edumet.cat/areatac/p2/imatges/infografia_twitter.png" style="max-width:100%;max-height:69vmin;;display: block;margin-left: auto;margin-right: auto;">';
+    
+        $('#modalHeaderTarja').html(msgTitol);
+        $('.modal-header').css('height','0px');
+        $('.modal-header').css('background-color','transparent');
+        $('.close').css('margin-top','-9px');
+        $('#missatgeTarja').html(divMsg);
+        $('#finestraTarja').css('width','100vmin !important');
+        $('#finestraTarja').modal('show');
+        $('.modal-header').css('height','4px');
+    }
+    
+    function obreDescripcio(id) {
+        var msgTitol = '<div style="display: flex;margin-right: 24px;justify-content: space-between;align-items:center">{{Nom de la formació}}';
+        msgTitol += '<a href="{{Edit_URL}}" target="_blank"><img src="https://edumet.cat/areatac/p2/imatges/baseline_edit_firebrick_48dp.png" style="height:5vmin"></a></div>';
+        var divMsg='<div style="display:flex;width:100%;height:70vh;font-size:1.7vmin">';
+        divMsg+='<div id="esquerra" class="div-comu div-caixa" style="width:40%;height:70vh">';
+        divMsg+='<div id="idees" class="div-comu div-caixa" style="width:100%;height:45vh;border-right-style:none;border-left-style: none;;border-top-style:none">';
+        divMsg+='<div class="subIcons"><img class="icona_blava" src="https://edumet.cat/areatac/p2/imatges/outline_wb_incandescent_black_48dp.png" />';
+        divMsg+='<label class="titolBlau">IDEES CLAU</label></div>';
+        divMsg+='<ul style="padding-inline-start: 20px"><li>{{Idees clau. Idea 1}}</li><li>{{Idees clau. Idea 2}}</li><li>{{Idees clau. Idea 3}}</li><li>{{Idees clau. Idea 4}}</li><li>{{Idees clau. Idea 5}}</li></ul></div>';
+        divMsg+=' <div id="tweet" class="div-comu div-caixa" style="width:100%;height:39vmin;border-style:none">';
+        divMsg+='<div class="subIcons"><img class="icona_blava" src="https://edumet.cat/areatac/p2/imatges/baseline_share_black_48dp.png" />';
+        divMsg+='  <div><label class="titolBlau">DIFUSIÓ</label></div></div><div style="padding:5px">';
+        divMsg+='{{Text}}<br><br><em style="color:firebrick">{{#}} {{Font}}</em></div></div>';
+        divMsg+='<div id="bottom-left" class="div-caixa" style="display:flex;width:100%;height:6vmin;border-style:none">';
+        divMsg+='<div id="logo" class="div-comu div-caixa" style="width:30%;height:6vmin;position:relative;border-style: none">';
+        divMsg+=' <img src="https://edumet.cat/areatac/p2/imatges/DGIRCD_2l_vermell.jpg" style="width:100%;position:absolute;left:5px;bottom:0"></div></div></div>';
+        divMsg+='<div id="centre" class="div-comu div-caixa" style="width:30%;height:70vh">';
+        divMsg+='<div id="assistent" class="div-comu div-caixa" style="width:100%;height:20vh;border-left-style:none;border-right-style:none;border-top-style:none">';
+        divMsg+='<div class="subIcons"><img class="icona_blava" src="https://edumet.cat/areatac/p2/imatges/outline_person_black_48dp.png" />';
+        divMsg+='<label class="titolBlau">ASSISTENT</label></div>';
+        divMsg+='<div style="padding:5px"><div>{{Nom i cognoms}}</div><div>{{Servei o àrea al que pertanys}}</div>';
+        divMsg+='<div style="display:flex;align-items:center"><img src="https://edumet.cat/areatac/p2/imatges/baseline_mail_outline_black_48dp.png" style="height:3vmin;padding-right:5px" />{{Adreça electrònica}}</div>';
+        divMsg+='<div id="phone" style="display:flex;align-items:center"><img src="https://edumet.cat/areatac/p2/imatges/baseline_call_black_48dp.png" style="height:3vmin;padding-right:5px" />934006900-<div id="extphone">{{Extensió telefònica}}</div></div>';
+        divMsg+='</div></div>';
+        divMsg+='<div id="networking" class="div-comu div-caixa" style="width:100%;height:25vh;border-left-style:none;border-right-style:none;border-top-style:none">';
+        divMsg+='<div class="subIcons"><img class="icona_blava" src="https://edumet.cat/areatac/p2/imatges/outline_group_add_black_48dp.png" />';
+        divMsg+='<label class="titolBlau">NETWORKING</label></div><ul style="padding-inline-start: 20px">';
+        divMsg+='<li>{{Contacte 1}}</li>';
+        divMsg+='<li>{{Contacte 2}}</li>';
+        divMsg+='<li>{{Contacte 3}}</li></ul></div>';
+        divMsg+='<div id="observacions" class="div-comu div-caixa" style="width:100%;height:25vh;border-style:none">';
+        divMsg+='<div class="subIcons"><img class="icona_blava" src="https://edumet.cat/areatac/p2/imatges/outline_comment_black_48dp.png" />';
+        divMsg+='<label class="titolBlau">OBSERVACIONS</label></div><div style="padding:5px">{{Observacions}}</div></div></div>';
+        divMsg+='<div id="dreta" class="div-comu div-caixa" style="width:30%;height:70vh">';
+        divMsg+='<div id="data" class="div-comu div-caixa" style="width:100%;height:10vh;border-right-style:none;border-left-style:none;border-top-style:none">';
+        divMsg+='<div class="subIcons"><img class="icona_blava" src="https://edumet.cat/areatac/p2/imatges/baseline_event_black_48dp.png" />';
+        divMsg+='<label class="titolBlau">DATA</label></div>';
+        divMsg+='<div style="text-align: center">{{Data de la formació}}</div></div>';  
+        divMsg+='<div id="modalitat" class="div-comu div-caixa" style="width:100%;height:10vh;border-right-style:none;border-left-style:none;border-top-style:none">';
+        divMsg+='<div class="subIcons"><img class="icona_blava" src="https://edumet.cat/areatac/p2/imatges/outline_local_offer_black_48dp.png" />';
+        divMsg+='<label class="titolBlau">MODALITAT</label></div>';
+        divMsg+='<div style="text-align: center">{{Modalitat}}</div></div>'; 
+        divMsg+='<div id="entitat" class="div-comu div-caixa" style="width:100%;height:10vh;border-right-style:none;border-left-style:none;border-top-style:none">';
+        divMsg+='<div class="subIcons"><img class="icona_blava" src="https://edumet.cat/areatac/p2/imatges/outline_home_work_black_48dp.png" />';
+        divMsg+='<label class="titolBlau">ENTITAT</label></div>';
+        divMsg+='<div style="text-align: center">{{Entitat que organitza}}</div></div>';    
+        divMsg+='<div id="paraules" class="div-comu div-caixa" style="width:100%;height:12vmin;border-right-style:none;border-left-style:none;border-top-style:none"><div class="subIcons">';
+        divMsg+='<img class="icona_blava" src="https://edumet.cat/areatac/p2/imatges/outline_vpn_key_black_48dp.png" />';
+        divMsg+='<label class="titolBlau">PARAULES CLAU</label></div>';
+        divMsg+='<div style="padding:5px">{{Paraules clau}}</div></div>';
+        divMsg+='<div id="enllacos" class="div-comu div-caixa" style="width:100%;height:14vh;border-right-style:none;border-left-style:none;border-top-style:none">';
+        divMsg+='<div class="subIcons"><img class="icona_blava" src="https://edumet.cat/areatac/p2/imatges/baseline_link_black_48dp.png" />';
+        divMsg+='<label class="titolBlau">ENLLAÇOS</label></div>';
+        divMsg+='<div style="text-align:center"><a id="enl1" href="{{Enllaç 1}}" target="blank">Enllaç 1</a></div>';
+        divMsg+='<div style="text-align:center"><a id="enl2" href="{{Enllaç 2}}" target="blank">Enllaç 2</a></div>';
+        divMsg+='<div style="text-align:center"><a id="enl3" href="{{Enllaç 3}}" target="blank">Enllaç 3</a></div></div>';
+        divMsg+='<div id="material" class="div-comu div-caixa" style="width:100%;height:14vh;border-style:none">';
+        divMsg+='<div class="subIcons"><img class="icona_blava" src="https://edumet.cat/areatac/p2/imatges/baseline_attach_file_black_48dp.png" />';
+        divMsg+='<label class="titolBlau">MATERIALS</label></div>';
+        divMsg+='<div style="text-align:center"><a id="mat1" href="{{Material 1}}" target="blank">Material 1</a></div>';
+        divMsg+='<div style="text-align:center"><a id="mat2" href="{{Material 2}}" target="blank">Material 2</a></div>';
+        divMsg+='<div style="text-align:center"><a id="mat3" href="{{Material 3}}" target="blank">Material 3</a></div></div></div></div>';
+      
+         for (r = 0; row_org.length; r++) {
+            if (id == row_org[r]['id']) {
             for (c = 0; c < row_cap[0].length; c++) {
                 var camp = row_cap[0][c];
                 var cadena = "{{" + camp + "}}";
                 if (divMsg.indexOf(cadena) > -1) {
-                    divMsg = divMsg.replace(new RegExp(cadena, 'g'), row_org[r][camp]);
+                divMsg = divMsg.replace(new RegExp(cadena, 'g'), row_org[r][camp]);
                 }
                 if (msgTitol.indexOf(cadena) > -1) {
-                    msgTitol = msgTitol.replace(new RegExp(cadena, 'g'), row_org[r][camp]);
+                msgTitol = msgTitol.replace(new RegExp(cadena, 'g'), row_org[r][camp]);
                 }
             }
-        break;
+            break;
+            }
         }
+        divMsg = divMsg.replace(new RegExp('<li></li>', 'g'), "");
+    
+        $('#modalHeaderTarja').html(msgTitol);
+        $('#missatgeTarja').html(divMsg);
+    
+        if ($('#enl1').attr('href') == "") {$('#enl1').html("")};
+        if ($('#enl2').attr('href') == "") {$('#enl2').html("")};
+        if ($('#enl3').attr('href') == "") {$('#enl3').html("")};
+    
+        if ($('#mat1').attr('href') == "") {$('#mat1').html("")};
+        if ($('#mat2').attr('href') == "") {$('#mat2').html("")};
+        if ($('#mat3').attr('href') == "") {$('#mat3').html("")};
+        
+        if($('#extphone').html() =="")  {$('#phone').html("")};
+    
+        $('.modal-header').css('height','unset');
+        $('.modal-header').css('background-color','firebrick');
+        $('.close').css('margin-top','-2px');
+        $('#finestraTarja').modal('show');
     }
-    divMsg = divMsg.replace(new RegExp('<li></li>', 'g'), "");
-
-    $('#modalHeaderTarja').html(msgTitol);
-    $('#missatgeTarja').html(divMsg);
-
-    if ($('#enl1').attr('href') == "") {$('#enl1').html("")};
-    if ($('#enl2').attr('href') == "") {$('#enl2').html("")};
-    if ($('#enl3').attr('href') == "") {$('#enl3').html("")};
-
-    if ($('#mat1').attr('href') == "") {$('#mat1').html("")};
-    if ($('#mat2').attr('href') == "") {$('#mat2').html("")};
-    if ($('#mat3').attr('href') == "") {$('#mat3').html("")};
-
-    $('#finestraTarja').modal('show');
-}
-</script>
+    </script>
